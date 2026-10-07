@@ -3,10 +3,12 @@ require_once __DIR__ . '/pdo.php';
 
 $id = (int) ($_GET['id'] ?? $_POST['id'] ?? 0);
 
+
 if ($id <= 0) {
     header('Location: index.php');
     exit;
 }
+
 
 $stmt = $pdo->prepare('SELECT id, nombre, email FROM usuarios WHERE id = :id');
 $stmt->execute(['id' => $id]);
@@ -16,7 +18,6 @@ if (!$usuario) {
     header('Location: index.php');
     exit;
 }
-
 $errores = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -45,6 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario['nombre'] = $nombre;
     $usuario['email'] = $email;
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
